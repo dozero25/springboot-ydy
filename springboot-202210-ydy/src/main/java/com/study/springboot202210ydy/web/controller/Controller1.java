@@ -17,4 +17,6 @@ public class Controller1 {
     public String page2(){
         return "page2";
     }
+
+
 }
