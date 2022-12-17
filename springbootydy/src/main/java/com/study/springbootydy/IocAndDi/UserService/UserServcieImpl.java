@@ -3,7 +3,7 @@ package com.study.springbootydy.IocAndDi.UserService;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UserServcieImpl implements UserService{
+public class UserServcieImpl implements UserService12 {
 
     User user = new User();
 
