@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 // 위에 4개는 필수라고 생각하면 된다.
 public class UserDto {
     private int userId;
-    private String userName;
+    private String username;
     private String password;
     private String name;
     private String email;
