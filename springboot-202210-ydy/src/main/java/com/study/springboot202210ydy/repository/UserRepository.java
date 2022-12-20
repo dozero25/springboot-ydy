@@ -7,5 +7,5 @@ import org.apache.ibatis.annotations.Mapper;
 public interface UserRepository {
 // repository는 항상 mapper를 가지고 있어야 한다.
     public int saveUser(UserDto userDto);
-    public UserDto findUserById(int userId);
+    public UserDto findUserByUserId(int userId);
 }

@@ -21,7 +21,7 @@ public class UserService {
 
     public UserDto getUser(int userId){
         UserDto userDto = null;
-        userDto = userRepository.findUserById(userId);
+        userDto = userRepository.findUserByUserId(userId);
         return userDto;
     }
 }
