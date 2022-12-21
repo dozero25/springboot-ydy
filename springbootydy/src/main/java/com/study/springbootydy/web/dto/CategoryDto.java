@@ -12,4 +12,6 @@ import lombok.NoArgsConstructor;
 public class CategoryDto {
     private int categoryId;
     private String categoryName;
+    private String categoryOpt1;
+    private String categoryOpt2;
 }
