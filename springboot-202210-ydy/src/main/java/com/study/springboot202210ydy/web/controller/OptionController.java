@@ -19,10 +19,11 @@ public class OptionController {
     @PostMapping("/category")
     public ResponseEntity<?> addCategory(@RequestBody CategoryDto categoryDto){
         return ResponseEntity
-                .created(URI.create("/api/option/category"+optionService.addCategory(categoryDto)))
+                .created(URI.create("/api/option/category/"+optionService.addCategory(categoryDto)))
                 .body(categoryDto);
     }
 
+    // @RequestMapping(value = "/caategories", method = RequestMethod.GET)
     @GetMapping("/categories")
     public ResponseEntity<?> getCategories(){
         return ResponseEntity.ok(optionService.getCategories());

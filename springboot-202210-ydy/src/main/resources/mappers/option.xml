@@ -5,7 +5,7 @@
 <mapper namespace="com.study.springboot202210ydy.repository.OptionRepository">
     <insert id="saveCategory" parameterType="com.study.springboot202210ydy.web.dto.CategoryDto"
     useGeneratedKeys="true" keyProperty="categoryId">
-        insert category_mst
+        insert category_mst(category_id, category_name)
         values(0, #{categoryName})
     </insert>
     <select id="getCategories" resultType="com.study.springboot202210ydy.web.dto.CategoryDto">
