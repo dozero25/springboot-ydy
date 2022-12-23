@@ -8,4 +8,5 @@ public interface UserRepository {
 // repository는 항상 mapper를 가지고 있어야 한다.
     public int saveUser(UserDto userDto);
     public UserDto findUserByUserId(int userId);
+    public UserDto findUserByUsername(String username);
 }
