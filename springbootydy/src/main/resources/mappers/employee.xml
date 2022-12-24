@@ -8,4 +8,13 @@
         insert into emp_mst
         values (0, #{empName}, #{empAge}, #{empPhone})
     </insert>
+    <select id="getEmployee" resultType="com.study.springbootydy.web.dto.EmployeeDto">
+        select
+            emp_id as empId,
+            emp_name as empName,
+            emp_age as empAge,
+            emp_phone as empPhone
+        from
+            emp_mst
+    </select>
 </mapper>

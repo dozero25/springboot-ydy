@@ -5,10 +5,7 @@ import com.study.springbootydy.web.dto.CMRespDto;
 import com.study.springbootydy.web.dto.EmployeeDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping
@@ -22,5 +19,9 @@ public class EmployeeController {
         return ResponseEntity
                 .created(null)
                 .body(new CMRespDto<>("직원등록완료", employeeService.addEmployee(employeeDto)));
+    }
+    @GetMapping("/api/employees")
+    public ResponseEntity<?> getEmployee(){
+        return ResponseEntity.ok(employeeService.getEmployee());
     }
 }
