@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -27,6 +28,10 @@ public class UserService {
         UserDto userDto = null;
         userDto = userRepository.findUserById(userId);
         return userDto;
+    }
+
+    public List<UserDto> getUsers(){
+        return userRepository.getUsers();
     }
 
     public void duplicateUsername(String username){

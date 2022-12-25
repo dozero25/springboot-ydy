@@ -21,6 +21,12 @@ public class DBTestController {
         int userId = userService.addUser(userDto);
         return ResponseEntity.created(URI.create("/api/db/test/user/")).body(userDto);
     }
+
+    @GetMapping("/users")
+    public ResponseEntity<?> userList(){
+        return ResponseEntity.ok(userService.getUsers());
+    }
+
     @GetMapping("/user/{userId}")
     public ResponseEntity<?> getUser(@PathVariable int userId){
         UserDto userDto = userService.getUser(userId);

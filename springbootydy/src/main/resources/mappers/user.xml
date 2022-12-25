@@ -9,6 +9,17 @@
         values(0, #{username}, #{password}, #{name}, #{email})
     </insert>
 
+    <select id="getUsers" resultType="com.study.springbootydy.web.dto.UserDto">
+        select
+            user_id as userId,
+            username,
+            password,
+            name,
+            email
+        from
+            user_mst
+    </select>
+
     <select id="findUserById" parameterType="integer" resultType="com.study.springbootydy.web.dto.UserDto">
         select
             user_id as userId,
