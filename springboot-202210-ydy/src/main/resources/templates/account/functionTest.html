@@ -10,17 +10,16 @@
     
     <script>
         
-        const test = () => {
-            alert("테스트 호출!!!");
-        };
+        const user = {
+            username: "test",
+            password: "1234",
+            name: "윤도영"
+        }
 
-        const abc = test;
-
-        test();
-
-        abc();
-
-        
+        Object.keys(user).forEach(key => {
+            console.log(key);
+            console.log(user[key]);
+        });
 
     </script>
 </body>

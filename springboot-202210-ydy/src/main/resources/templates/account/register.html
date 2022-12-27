@@ -116,13 +116,14 @@
         class RegisterApi {
             static #instance = null;
             static getInstance() {
-                if(this.#instance == null){
+                if(this.#instance == null) {
                     this.#instance = new RegisterApi();
                 }
                 return this.#instance;
             }
 
             registrationUser(user) {
+                const errorMsgs = document.querySelectorAll(".error-msg");
                 $.ajax({
                     async: false,
                     type: "post",
@@ -135,6 +136,21 @@
                     },
                     error: (errorResponse) => {
                         console.log(errorResponse);
+                        const errorMap = errorResponse.responseJSON.data;
+                        errorMsgs.forEach(errorMsg => {
+                            errorMsg.textContent = "";
+                        });
+                        Object.keys(errorMap).forEach(key => {
+                            if(key == "username") {
+                                errorMsgs[0].textContent = errorMap[key];
+                            }else if(key == "password") {
+                                errorMsgs[1].textContent = errorMap[key];
+                            }else if(key == "name") {
+                                errorMsgs[2].textContent = errorMap[key];
+                            }else if(key == "email") {
+                                errorMsgs[3].textContent = errorMap[key];
+                            }
+                        });
                     }
                 });
             }
@@ -142,7 +158,7 @@
             duplicateUsername(username) {
                 const usernameInput = document.querySelectorAll(".register-text")[0];
                 const usernameError = document.querySelectorAll(".error-msg")[0];
-                
+
                 $.ajax({
                     async: false,
                     type: "get",
@@ -152,17 +168,15 @@
                     success: (response) => {
                         usernameInput.classList.add("success");
                         usernameError.textContent = "";
-                        
                     },
                     error: (errorResponse) => {
                         console.log(errorResponse);
                         usernameInput.classList.remove("success");
-                        usernameError.innerHTML = errorResponse.responseJSON.data.username;
+                        usernameError.textContent = errorResponse.responseJSON.data.username;
                     }
                 });
             }
         }
-        
 
         class RegisterService {
             static #instance = null;
@@ -192,7 +206,6 @@
                     }
                     RegisterApi.getInstance().registrationUser(user);
                 }
-
             }
 
 
@@ -202,6 +215,7 @@
             RegisterService.getInstance().addEventToUsernameInput();
             RegisterService.getInstance().addEventToRegisterButton();
         }
+
 
     </script>
 </body>

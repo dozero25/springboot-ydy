@@ -2,6 +2,7 @@ package com.study.springboot202210ydy.web.controller.account;
 
 import com.study.springboot202210ydy.web.dto.CMRespDto;
 import com.study.springboot202210ydy.web.exception.CustomDuplicateUsernameException;
+import com.study.springboot202210ydy.web.exception.CustomValidException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -29,5 +30,10 @@ public class AccountApiControllerAdvice {
             errorMap.put(errorProperty, error.getMessage());
         });
         return ResponseEntity.badRequest().body(new CMRespDto<>(e.getMessage(), errorMap));
+    }
+
+    @ExceptionHandler(CustomValidException.class)
+    public ResponseEntity<?> validationError(CustomValidException e) {
+        return ResponseEntity.badRequest().body(new CMRespDto<>(e.getMessage(), e.getErrorMap()));
     }
 }
