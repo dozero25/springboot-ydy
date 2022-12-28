@@ -17,7 +17,7 @@ import javax.validation.constraints.Pattern;
 public class UserDto {
     private int userId;
 
-    @Pattern(regexp = "^[a-zA-Z0-9]$", message = "사용자 이름을 영문, 숫자 조합이어야하며 5자 이상 20자 이하로 작성하세요")
+    @Pattern(regexp = "^[a-zA-Z0-9]{5,20}$", message = "사용자 이름을 영문, 숫자 조합이어야하며 5자 이상 20자 이하로 작성하세요")
     private String username;
 
     @Pattern(regexp = "^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[~!#$%^&*])[a-zA-Z0-9~!@#$%^&*]{8,16}$",

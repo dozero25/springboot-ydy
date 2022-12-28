@@ -24,7 +24,7 @@
         }
 
         .register-title {
-            font-size: 25px;
+            font-size: 30px;
             text-align: center;
         }
 
@@ -54,8 +54,9 @@
         }
 
         .success {
-            border: 1px solid #00dd4d;
+            border: 2px solid #00dd4d;
         }
+    
 
         .error-msg {
             color: rgb(255, 73, 23);
@@ -82,36 +83,36 @@
     </style>
 </head>
 <body>
-<div id="container">
-    <h1 class="register-title">회원가입</h1>
-    <div class="register-inputs">
-        <input type="text" class="register-text" placeholder="사용자이름">
-        <div class="error-msg">
+    <div id="container">
+        <h1 class="register-title">회원가입</h1>
+        <div class="register-inputs">
+            <input type="text" class="register-text" placeholder="사용자이름">
+            <div class="error-msg">
 
+            </div>
         </div>
-    </div>
-    <div class="register-inputs">
-        <input type="password" class="register-text" placeholder="비밀번호">
-        <div class="error-msg">
-
+        <div class="register-inputs">
+            <input type="password" class="register-text" placeholder="비밀번호">
+            <div class="error-msg">
+                
+            </div>
         </div>
-    </div>
-    <div class="register-inputs">
-        <input type="text" class="register-text" placeholder="이름">
-        <div class="error-msg">
-
+        <div class="register-inputs">
+            <input type="text" class="register-text" placeholder="이름">
+            <div class="error-msg">
+                
+            </div>
         </div>
-    </div>
-    <div class="register-inputs">
-        <input type="text" class="register-text" placeholder="이메일">
-        <div class="error-msg">
-
+        <div class="register-inputs">
+            <input type="text" class="register-text" placeholder="이메일">
+            <div class="error-msg">
+                
+            </div>
         </div>
+        <button class="register-button">회원가입</button>
     </div>
-    <button class="register-button">회원가입</button>
-</div>
 
-<script>
+    <script>
         class RegisterApi {
             static #instance = null;
             static getInstance() {
@@ -150,7 +151,6 @@
                                 errorMsgs[3].textContent = errorMap[key];
                             }
                         });
-
                     }
                 });
             }

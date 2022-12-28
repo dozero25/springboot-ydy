@@ -16,9 +16,7 @@ public class AccountApiControllerAdvice {
 
     @ExceptionHandler(CustomDuplicateUsernameException.class)
     public ResponseEntity<?> duplicateError(CustomDuplicateUsernameException e){
-        return ResponseEntity
-                .badRequest()
-                .body(new CMRespDto<>(e.getMessage(), e.getErrorMap()));
+        return ResponseEntity.badRequest().body(new CMRespDto<>(e.getMessage(), e.getErrorMap()));
     }
 
     @ExceptionHandler(ConstraintViolationException.class)
@@ -31,7 +29,6 @@ public class AccountApiControllerAdvice {
             errorProperty = errorProperty.substring(errorProperty.lastIndexOf(".") + 1);
             errorMap.put(errorProperty, error.getMessage());
         });
-
         return ResponseEntity.badRequest().body(new CMRespDto<>(e.getMessage(), errorMap));
     }
 
@@ -40,4 +37,3 @@ public class AccountApiControllerAdvice {
         return ResponseEntity.badRequest().body(new CMRespDto<>(e.getMessage(), e.getErrorMap()));
     }
 }
-

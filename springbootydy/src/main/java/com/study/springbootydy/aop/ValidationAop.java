@@ -16,25 +16,23 @@ import java.util.Map;
 public class ValidationAop {
 
     @Pointcut("execution(* com.study.springbootydy.web.controller.account.AccountApiController.*(..))")
-    private void executePointCut() {
-    }
+    private void executePointCut() {}
 
     @Around("executePointCut()")
-    public Object around(ProceedingJoinPoint proceedingJoinPoint) throws Throwable{
+    public Object around(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         Object[] args = proceedingJoinPoint.getArgs();
 
         System.out.println("AOP 작동함!!");
 
         BeanPropertyBindingResult bindingResult = null;
 
-        for (Object arg : args) {
-            if (arg.getClass() == BeanPropertyBindingResult.class) {
+        for(Object arg : args) {
+            if(arg.getClass() == BeanPropertyBindingResult.class){
                 bindingResult = (BeanPropertyBindingResult) arg;
                 break;
             }
         }
-
-        if (bindingResult != null) {
+        if (bindingResult != null){
             if (bindingResult.hasErrors()) {
                 Map<String, String> errorMap = new HashMap<>();
                 bindingResult.getFieldErrors().forEach(error -> {
@@ -44,9 +42,10 @@ public class ValidationAop {
             }
         }
 
+        // 메소드 호출 전 처리
         Object returnValue = proceedingJoinPoint.proceed();
+
 
         return returnValue;
     }
-
 }
