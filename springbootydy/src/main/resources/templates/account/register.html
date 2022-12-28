@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
     <title>Document</title>
     <style>
         * {
@@ -24,7 +24,7 @@
         }
 
         .register-title {
-            font-size: 30px;
+            font-size: 25px;
             text-align: center;
         }
 
@@ -54,7 +54,7 @@
         }
 
         .success {
-            border: 2px solid #00dd4d;
+            border: 1px solid #00dd4d;
         }
 
         .error-msg {
@@ -74,7 +74,7 @@
             cursor: pointer;
         }
 
-        .register-button:active{
+        .register-button:active {
             background-color: #303030;
             box-shadow: 0px 0px 10px 1px #dbdbdb;
         }
@@ -82,46 +82,47 @@
     </style>
 </head>
 <body>
-    <div id="container">
-        <h1 class="register-title">회원가입</h1>
-        <div class="register-inputs">
-            <input type="text" class="register-text" placeholder="사용자이름">
-            <div class="error-msg">
+<div id="container">
+    <h1 class="register-title">회원가입</h1>
+    <div class="register-inputs">
+        <input type="text" class="register-text" placeholder="사용자이름">
+        <div class="error-msg">
 
-            </div>
         </div>
-        <div class="register-inputs">
-            <input type="password" class="register-text" placeholder="비밀번호">
-            <div class="error-msg">
-
-            </div>
-        </div>
-        <div class="register-inputs">
-            <input type="text" class="register-text" placeholder="이름">
-            <div class="error-msg">
-
-            </div>
-        </div>
-        <div class="register-inputs">
-            <input type="text" class="register-text" placeholder="이메일">
-            <div class="error-msg">
-
-            </div>
-        </div>
-        <button class="register-button">회원가입</button>
     </div>
+    <div class="register-inputs">
+        <input type="password" class="register-text" placeholder="비밀번호">
+        <div class="error-msg">
 
-    <script>
+        </div>
+    </div>
+    <div class="register-inputs">
+        <input type="text" class="register-text" placeholder="이름">
+        <div class="error-msg">
+
+        </div>
+    </div>
+    <div class="register-inputs">
+        <input type="text" class="register-text" placeholder="이메일">
+        <div class="error-msg">
+
+        </div>
+    </div>
+    <button class="register-button">회원가입</button>
+</div>
+
+<script>
         class RegisterApi {
             static #instance = null;
             static getInstance() {
-                if(this.#instance == null){
+                if(this.#instance == null) {
                     this.#instance = new RegisterApi();
                 }
                 return this.#instance;
             }
 
             registrationUser(user) {
+                const errorMsgs = document.querySelectorAll(".error-msg");
                 $.ajax({
                     async: false,
                     type: "post",
@@ -134,6 +135,22 @@
                     },
                     error: (errorResponse) => {
                         console.log(errorResponse);
+                        const errorMap = errorResponse.responseJSON.data;
+                        errorMsgs.forEach(errorMsg => {
+                            errorMsg.textContent = "";
+                        });
+                        Object.keys(errorMap).forEach(key => {
+                            if(key == "username") {
+                                errorMsgs[0].textContent = errorMap[key];
+                            }else if(key == "password") {
+                                errorMsgs[1].textContent = errorMap[key];
+                            }else if(key == "name") {
+                                errorMsgs[2].textContent = errorMap[key];
+                            }else if(key == "email") {
+                                errorMsgs[3].textContent = errorMap[key];
+                            }
+                        });
+
                     }
                 });
             }
@@ -155,7 +172,7 @@
                     error: (errorResponse) => {
                         console.log(errorResponse);
                         usernameInput.classList.remove("success");
-                        usernameError.innerHTML = errorResponse.responseJSON.data.username;
+                        usernameError.textContent = errorResponse.responseJSON.data.username;
                     }
                 });
             }
@@ -164,13 +181,13 @@
         class RegisterService {
             static #instance = null;
             static getInstance() {
-                if(this.#instance == null){
+                if(this.#instance == null) {
                     this.#instance = new RegisterService();
                 }
                 return this.#instance;
-            } 
+            }
 
-            addEventToUsernameInput(){
+            addEventToUsernameInput() {
                 const usernameInput = document.querySelectorAll(".register-text")[0];
                 usernameInput.onblur = () => {
                     RegisterApi.getInstance().duplicateUsername(usernameInput.value);
@@ -189,9 +206,9 @@
                     }
                     RegisterApi.getInstance().registrationUser(user);
                 }
+            }
 
-            }
-            }
+
         }
 
         window.onload = () => {
@@ -199,7 +216,7 @@
             RegisterService.getInstance().addEventToRegisterButton();
         }
 
+
     </script>
-    
 </body>
 </html>
