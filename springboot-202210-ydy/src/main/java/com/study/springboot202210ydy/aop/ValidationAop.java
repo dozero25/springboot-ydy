@@ -18,11 +18,20 @@ public class ValidationAop {
     @Pointcut("execution(* com.study.springboot202210ydy.web.controller.account.AccountApiController.*(..))")
     private void executePointCut() {}
     // 패키지 경로
-    // *(..) 이 클래스 안에 있는 모든 메소드의 매개변수 몇개든 상관없다.
+    // *(..) 이 클래스 안에 있는 모든 메소드의 매개변수 몇개든 상관없다. 리턴자료형
     //  com.study.springboot202210ydy.web.controller..AccountApiController.*(..)) -> controller안에 있는 모든 패키지
+
+    @Pointcut("@annotation(com.study.springboot202210ydy.aop.annotation.ValidAspect)")
+    private void annotationPointCut() {}
+
     @Around("executePointCut()") // @Around : 실행되기 전과 후 둘다
     public Object around(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+                        // userDto, bindingResult가 여기로 가져와진다.
         Object[] args = proceedingJoinPoint.getArgs();
+
+        for(Object arg : args) {
+            System.out.println(arg);
+        }
 
         System.out.println("AOP 작동함!!");
 
