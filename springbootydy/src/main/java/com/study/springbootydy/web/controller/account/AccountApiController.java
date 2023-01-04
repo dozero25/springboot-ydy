@@ -1,5 +1,8 @@
 package com.study.springbootydy.web.controller.account;
 
+import com.study.springbootydy.aop.annotation.ParamsAspect;
+import com.study.springbootydy.aop.annotation.PrintTestAspect;
+import com.study.springbootydy.aop.annotation.TimerAspect;
 import com.study.springbootydy.service.UserService;
 import com.study.springbootydy.web.dto.CMRespDto;
 import com.study.springbootydy.web.dto.UserDto;
@@ -22,6 +25,9 @@ public class AccountApiController {
     @Autowired
     private UserService userService;
 
+    @ParamsAspect
+    @PrintTestAspect
+    @TimerAspect
     @GetMapping("/username")
     public ResponseEntity<?> duplicateUsername(@Valid UsernameDto usernameDto, BindingResult bindingResult){
         userService.duplicateUsername(usernameDto.getUsername());

@@ -18,6 +18,9 @@ public class ValidationAop {
     @Pointcut("execution(* com.study.springbootydy.web.controller.account.AccountApiController.*(..))")
     private void executePointCut() {}
 
+    @Around("@annotation(com.study.springbootydy.aop.annotation.ValidAspect)")
+    private void annotationPointCut(){}
+
     @Around("executePointCut()")
     public Object around(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         Object[] args = proceedingJoinPoint.getArgs();
